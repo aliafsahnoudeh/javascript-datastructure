@@ -1,4 +1,5 @@
 import Node from './node';
+import NoSuchElementExists from '../Exceptions/NoSuchElementExists';
 
 class LinkedList {
     constructor() {
@@ -26,13 +27,13 @@ class LinkedList {
 
     removeFirst() {
         if(this._isEmpty())
-            return;
+            throw new NoSuchElementExists();
         
         if(this.first === this.last) {
             this.first = this.last = null;
             return;
         }
-        
+
         let second = this.first.next;
         this.first.next = null;
         this.first = second;
@@ -40,7 +41,7 @@ class LinkedList {
 
     removeLast() {
         if(this._isEmpty())
-            return;
+            throw new NoSuchElementExists();
 
         let nextNode = this.first.next;
         if(!nextNode)   return this.first = this.last = null;
