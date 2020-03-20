@@ -1,5 +1,5 @@
 import Node from './node';
-import NoSuchElementExists from '../Exceptions/NoSuchElementExists';
+import NoSuchElementException from '../Exceptions/NoSuchElementException';
 
 class LinkedList {
     constructor() {
@@ -27,7 +27,7 @@ class LinkedList {
 
     removeFirst() {
         if(this._isEmpty())
-            throw new NoSuchElementExists();
+            throw new NoSuchElementException();
         
         if(this.first === this.last) {
             this.first = this.last = null;
@@ -41,20 +41,16 @@ class LinkedList {
 
     removeLast() {
         if(this._isEmpty())
-            throw new NoSuchElementExists();
+            throw new NoSuchElementException();
 
-        let nextNode = this.first.next;
-        if(!nextNode)   return this.first = this.last = null;
-
-        let secondToLast = null;
-
-        while(nextNode.next) {
-            secondToLast = nextNode;
-            nextNode = nextNode.next;
+        if(this.first === this.last) {
+            this.first = this.last = null;
+            return;
         }
 
-        secondToLast.next = null;
-        this.last = secondToLast;
+        let previous = this._getPrevious(this.last);
+        this.last = previous;
+        this.last.next = null;
     }
 
     contains(item) {
@@ -85,6 +81,15 @@ class LinkedList {
     _isEmpty() {
         if(this.first === null && this.last === null) return true;
         return false;
+    }
+
+    _getPrevious(node) {
+        let current = this.first;
+        while(current) {
+            if(current.next === node) return current;
+            current = current.next;
+        }
+        return null;
     }
 }
 

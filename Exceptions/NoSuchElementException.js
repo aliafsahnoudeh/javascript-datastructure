@@ -1,4 +1,4 @@
-class NoSuchElementExists extends Error {  
+class NoSuchElementException extends Error {  
     constructor (message) {
       super(message)
   
@@ -6,4 +6,4 @@ class NoSuchElementExists extends Error {
     }
   }
   
-  export default NoSuchElementExists  
+  export default NoSuchElementException  
