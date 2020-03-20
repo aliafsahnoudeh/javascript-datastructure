@@ -8,6 +8,7 @@ class LinkedList {
         this.itemCount = 0;
     }
 
+    // O(1)
     addFirst(value) {
         if(this._isEmpty())
             this._initFirstValue(value);
@@ -18,6 +19,7 @@ class LinkedList {
         this.itemCount++;
     }
 
+    // O(1)
     addLast(value) {
         if(this._isEmpty())
             this._initFirstValue(value);
@@ -30,6 +32,7 @@ class LinkedList {
         this.itemCount++;
     }
 
+    // O(1)
     removeFirst() {
         if(this._isEmpty())
             throw new NoSuchElementException();
@@ -45,6 +48,7 @@ class LinkedList {
         this.itemCount--;
     }
 
+    // O(n)
     removeLast() {
         if(this._isEmpty())
             throw new NoSuchElementException();
@@ -60,10 +64,12 @@ class LinkedList {
         this.itemCount--;
     }
 
+    // O(n)
     contains(item) {
         return this.indexOf(item) !== -1;
     }
 
+    // O(n)
     indexOf(item) {
         let index = 0;
         let current = this.first;
@@ -80,6 +86,7 @@ class LinkedList {
         return this.itemCount;
     }
 
+    // O(n)
     toArray() {
         let array = [];
         let current = this.first;

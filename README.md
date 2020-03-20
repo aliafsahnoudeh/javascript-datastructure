@@ -1,0 +1,1 @@
+Implementation of couple of data structures in JavaScript and some exercise about them.
