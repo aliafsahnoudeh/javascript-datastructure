@@ -7,16 +7,16 @@ class LinkedList {
     }
 
     addFirst(value) {
-        if(this.isEmpty())
-            return this.initFirstValue(value);
+        if(this._isEmpty())
+            return this._initFirstValue(value);
 
         let newFirst = new Node(value, this.first);  
         this.first = newFirst;
     }
 
     addLast(value) {
-        if(this.isEmpty())
-            return this.initFirstValue(value);
+        if(this._isEmpty())
+            return this._initFirstValue(value);
         
         let newLast = new Node(value, null);    
         this.last.next = newLast;
@@ -25,14 +25,21 @@ class LinkedList {
     }
 
     removeFirst() {
-        if(this.isEmpty())
+        if(this._isEmpty())
             return;
         
-        this.first = this.first.next
+        if(this.first === this.last) {
+            this.first = this.last = null;
+            return;
+        }
+        
+        let second = this.first.next;
+        this.first.next = null;
+        this.first = second;
     }
 
     removeLast() {
-        if(this.isEmpty())
+        if(this._isEmpty())
             return;
 
         let nextNode = this.first.next;
@@ -49,22 +56,17 @@ class LinkedList {
         this.last = secondToLast;
     }
 
-    contains(value) {
-        let nextNode = this.first;
-        while(nextNode) {
-            if(nextNode.value === value) return true;
-            nextNode = nextNode.next;
-        }
-        return false;
+    contains(item) {
+        return this.indexOf(item) !== -1;
     }
 
-    indexOf(value) {
-        let index = -1;
-        let nextNode = this.first;
-        while(nextNode) {
+    indexOf(item) {
+        let index = 0;
+        let current = this.first;
+        while(current) {
+            if(current.value === item) return index;
             index++;
-            if(nextNode.value === value) return index;
-            nextNode = nextNode.next;
+            current = current.next;
         }
         return -1;
     }
@@ -73,13 +75,13 @@ class LinkedList {
         console.log(JSON.stringify(this, null, 4))
     }
 
-    initFirstValue(value) {
+    _initFirstValue(value) {
         let newNode = new Node(value, null);
         this.first = newNode;
         this.last = newNode;
     }
 
-    isEmpty() {
+    _isEmpty() {
         if(this.first === null && this.last === null) return true;
         return false;
     }
