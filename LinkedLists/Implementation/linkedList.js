@@ -1,5 +1,5 @@
 import Node from './node';
-import NoSuchElementException from '../Exceptions/NoSuchElementException';
+import NoSuchElementException from '../../Exceptions/NoSuchElementException';
 
 class LinkedList {
     constructor() {
@@ -78,6 +78,16 @@ class LinkedList {
     // O(1)
     size() {
         return this.itemCount;
+    }
+
+    toArray() {
+        let array = [];
+        let current = this.first;
+        while(current) {
+            array.push(current.value);
+            current = current.next;
+        }
+        return array;
     }
 
     print() {
