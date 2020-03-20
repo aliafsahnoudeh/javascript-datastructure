@@ -5,52 +5,59 @@ class LinkedList {
     constructor() {
         this.first = null;
         this.last = null;
+        this.itemCount = 0;
     }
 
     addFirst(value) {
         if(this._isEmpty())
-            return this._initFirstValue(value);
-
-        let newFirst = new Node(value, this.first);  
-        this.first = newFirst;
+            this._initFirstValue(value);
+        else {
+            let newFirst = new Node(value, this.first);  
+            this.first = newFirst;
+        }
+        this.itemCount++;
     }
 
     addLast(value) {
         if(this._isEmpty())
-            return this._initFirstValue(value);
-        
-        let newLast = new Node(value, null);    
-        this.last.next = newLast;
-
-        this.last = newLast;
+            this._initFirstValue(value);
+        else {
+            let newLast = new Node(value, null);    
+            this.last.next = newLast;
+    
+            this.last = newLast;
+        }
+        this.itemCount++;
     }
 
     removeFirst() {
         if(this._isEmpty())
             throw new NoSuchElementException();
         
-        if(this.first === this.last) {
+        if(this.first === this.last) 
             this.first = this.last = null;
-            return;
+        else {
+            let second = this.first.next;
+            this.first.next = null;
+            this.first = second;
         }
-
-        let second = this.first.next;
-        this.first.next = null;
-        this.first = second;
+        
+        this.itemCount--;
     }
 
     removeLast() {
         if(this._isEmpty())
             throw new NoSuchElementException();
 
-        if(this.first === this.last) {
+        if(this.first === this.last)
             this.first = this.last = null;
-            return;
+        else {
+            let previous = this._getPrevious(this.last);
+            this.last = previous;
+            this.last.next = null;
         }
-
-        let previous = this._getPrevious(this.last);
-        this.last = previous;
-        this.last.next = null;
+        
+        this.itemCount--;
     }
 
     contains(item) {
@@ -66,6 +73,11 @@ class LinkedList {
             current = current.next;
         }
         return -1;
+    }
+
+    // O(1)
+    size() {
+        return this.itemCount;
     }
 
     print() {
