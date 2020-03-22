@@ -13,5 +13,6 @@ Couple of exercises about linked lists:
 
 2) Implement a doubly linked list.
 3) Implement a circular linked list.
-4) Reverse a Linked List.
+4) Reverse a Linked List in place.
+   Solution: reverse method in linkedList.js
 5) Finde the nth node from the end.

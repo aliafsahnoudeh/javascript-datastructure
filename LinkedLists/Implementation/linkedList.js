@@ -101,6 +101,21 @@ class LinkedList {
         console.log(JSON.stringify(this, null, 4))
     }
 
+    reverse() {
+        let current = this.first;
+        let previous = null;
+        this.last = this.first;
+        
+        while(current) {
+            let next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        this.first = previous;
+    }
+
     _initFirstValue(value) {
         let newNode = new Node(value, null);
         this.first = newNode;
