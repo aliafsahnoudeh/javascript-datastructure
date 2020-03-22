@@ -1,5 +1,6 @@
 import Node from './node';
 import NoSuchElementException from '../../Exceptions/NoSuchElementException';
+import IllegalArgumentException from '../../Exceptions/IllegalArgumentException';
 
 class LinkedList {
     constructor() {
@@ -98,9 +99,10 @@ class LinkedList {
     }
 
     print() {
-        console.log(JSON.stringify(this, null, 4))
+        console.log(JSON.stringify(this, null, 4));
     }
 
+    // O(n)
     reverse() {
         let current = this.first;
         let previous = null;
@@ -114,6 +116,32 @@ class LinkedList {
         }
 
         this.first = previous;
+    }
+
+    // O(n)
+    getNthFromEnd(n) {
+        if(n > this.itemCount)
+            throw new IllegalArgumentException();
+
+        let firstPointer = this.first;
+        let secondPointer = this.first;
+        let distance = 0;
+
+        let current = this.first;  
+
+        while(current.next) {
+            secondPointer = current.next;
+            distance++;
+
+            current = current.next;
+            if(distance >= n) {
+                firstPointer = firstPointer.next;
+                distance--;
+            }
+        }
+
+        if(distance === n - 1) return firstPointer.value;
+        else return null;
     }
 
     _initFirstValue(value) {

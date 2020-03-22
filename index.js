@@ -6,7 +6,5 @@ linkedList.addLast(2);
 linkedList.addLast(3);
 linkedList.addLast(4);
 
-linkedList.reverse();
-
-linkedList.print();
+console.log(linkedList.getNthFromEnd(1));
 
