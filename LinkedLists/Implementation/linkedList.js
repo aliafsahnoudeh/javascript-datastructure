@@ -144,6 +144,25 @@ class LinkedList {
         else return null;
     }
 
+    // O(n)
+    getMiddleNode() {
+        if(this._isEmpty())
+            throw new NoSuchElementException();
+        
+        let middlePointer = this.first;
+        let endPointer = this.first;
+
+        while (endPointer !== this.last && endPointer.next !== this.last) {
+            endPointer = endPointer.next.next;
+            middlePointer = middlePointer.next;
+        }
+
+        if (endPointer === this.last)
+            return middlePointer.value;
+        else
+            return [middlePointer.value, middlePointer.next.value];
+    }
+
     _initFirstValue(value) {
         let newNode = new Node(value, null);
         this.first = newNode;
